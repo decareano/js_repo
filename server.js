@@ -1,27 +1,34 @@
-// var http = require('http');
-// var fs = require('fs');
-// var server = http.createServer(function (req, res) {
-//   fs.readFile('form.html', function(err, data) {
-//     res.writeHead(200, {
-//       'Content-Type' : 'text/html',
-//       'Content-Length': data.length
-//     });
-//     res.write(data);
-//     res.end();
-//   });
-// })
-// server.listen(3000);
-
 var express = require('express');
+
 var app = express();
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
-app.get('/', function (req, res) {
-   res.send('Hello World');
-})
 
-var server = app.listen(3000, function () {
-   var host = server.address().address
-   var port = server.address().port
-   
-   console.log("Example app listening at http://%s:%s", host, port)
-})
+
+
+
+
+
+
+app.get('/catnips', function(req, res) {
+//   var err = new Error();
+//   err.status = 404;
+//   next(err);
+// });
+	res.render('form.ejs');
+// handling 404 errors
+// app.use(function(err, req, res, next) {
+//   if(err.status !== 404) {
+//     return next();
+//   }
+
+//   res.send(err.message || '** no unicorns here **');
+});
+
+
+app.get('/', function(req, res) {
+  res.send('hello world');
+});
+
+app.listen(3000);
